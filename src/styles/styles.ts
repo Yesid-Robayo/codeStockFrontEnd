@@ -13,7 +13,8 @@ export const STYLES = {
     "blue-950": "#111827"
   },
   fonts: {
-    primary: 'KodeMono, monospace',
-    text: "Anta ,sans-serif "
+    primary: "Freeman, sans-serif",
+
+    text: "Ubuntu ,sans-serif "
   },
 }
