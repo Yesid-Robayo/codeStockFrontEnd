@@ -1,20 +1,19 @@
+import { useState } from "react";
+import { Login } from "../../components/login/Login";
 import { useLabels, useStyles } from "../../hooks/contextHooks";
+import { Register } from "../../components/register/Register";
 
 export const LoginPage = () => {
     const labels = useLabels();
     const styles = useStyles();
+    const [inRegister, setInRegister] = useState(false);
+    const onChangeLogin = () => {
+        setInRegister(!inRegister);
+    }
     return (
-        <div className='bg-gradient-to-r from-zinc-950 via-zinc-800 to-zinc-950 text-white' style={{ fontFamily: styles.fonts.text, height: '100vh' }}>
-            <div
-                id="home"
-                className="flex justify-center items-center"
-                style={{ height: 'calc(100vh - 5rem )' }}
-            >
-                <div className="h-1/2 w-2/3 border-2 border-zinc-800 p-5 rounded-3xl">
-                    <div className="text-center font-normal text-xl  " style={{ fontFamily: styles.fonts.primary }}><h1>{labels.login}</h1>                    </div>
-
-
-                </div>
+        <div className='bg-gradient-to-r pt-20 from-zinc-950 via-zinc-800 w-full to-zinc-950 text-white' style={{ fontFamily: styles.fonts.text, minHeight: '100vh' }}>
+            <div className="flex justify-center items-center h-full" style={{ minHeight: '60vh' }}>
+                {inRegister ? <Register onChangeLogin={onChangeLogin} /> : <Login onChangeLogin={onChangeLogin} />}
             </div>
         </div>
     );

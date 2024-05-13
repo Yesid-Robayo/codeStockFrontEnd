@@ -6,18 +6,19 @@ export const LABELS_ES = {
     /* ----------------- A -----------------  */
     access: 'Acceder',
     /* ----------------- B -----------------  */
-
+    birthDate: 'Fecha de Nacimiento',
     /* ----------------- C -----------------  */
     companys: 'Empresas',
     categorys: 'Categorias',
     /* ----------------- D -----------------  */
 
     /* ----------------- E -----------------  */
-
+    email: 'Correo Electrónico',
     /* ----------------- F -----------------  */
-
+    firstName: 'Nombre',
+    female: 'Mujer',
     /* ----------------- G -----------------  */
-
+    gender: 'Género',
     /* ----------------- H -----------------  */
 
     /* ----------------- I -----------------  */
@@ -28,7 +29,9 @@ export const LABELS_ES = {
 
     /* ----------------- L -----------------  */
     login: 'Iniciar Sesión',
+    lastName: 'Apellido',
     /* ----------------- M -----------------  */
+    male: 'Hombre',
 
     /* ----------------- N -----------------  */
 
@@ -36,6 +39,8 @@ export const LABELS_ES = {
 
     /* ----------------- P -----------------  */
     products: 'Productos',
+    password: 'Contraseña',
+    phoneNumber: 'Número de Teléfono',
     profile: 'Perfil',
     /* ----------------- Q -----------------  */
 
