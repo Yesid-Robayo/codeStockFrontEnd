@@ -13,7 +13,7 @@ export const Toast = ({ message }: { message: string }) => {
 
     return (
         <div className="fixed animate-enterFromLeft bottom-0 left-0 w-full p-4 flex justify-center">
-            <div className="text-white px-4 py-2 rounded-full" style={{backgroundColor:styles.colors['blue-500']}}>
+            <div className="text-white px-4 py-2 rounded-full bg-zinc-700" style={{fontFamily:styles.fonts.text}}>
                 {message}
             </div>
         </div>

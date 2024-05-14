@@ -1,3 +1,1 @@
-export interface IUseLabels {
-
-}
+export type typeOfOptionCreateCompany = "add" | "edit" | "delete"
