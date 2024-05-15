@@ -6,18 +6,59 @@ export interface MessageProps {
     onAccept: () => void;
     onCancel: () => void;
 }
+/**
+ * Represents a product response data transfer object (DTO).
+ */
 export interface productResponseDTO {
-    id: number;
+    /**
+     * The ID of the product.
+     */
+    idProduct: number;
+    
+    /**
+     * The code of the product.
+     */
     code: string;
+    
+    /**
+     * The name of the product.
+     */
     name: string;
+    
+    /**
+     * The characteristics of the product.
+     */
     characteristics: string;
-    idCompany: number; 
+    
+    /**
+     * The ID of the company associated with the product.
+     */
+    idCompany: number;
+    
+    /**
+     * The prices of the product in different currencies.
+     */
     prices: {
+        /**
+         * The ID of the currency.
+         */
         idCurrency: number,
-        price: number,
+        
+        /**
+         * The price of the product in the currency.
+         */
+        price: string,
+        
+        /**
+         * The ID of the product.
+         */
         idProduct: number
     }[];
-    categories:categoriesResponseDTO[];
+    
+    /**
+     * The categories associated with the product.
+     */
+    categories: categoriesResponseDTO[];
 }
 
 export interface categoriesResponseDTO {
@@ -69,4 +110,17 @@ export interface userData {
     phone: string;
 
 }
+
+
+export interface orderRequestDTO {
+    idPerson: number
+    products: {
+        idProduct: number,
+        quantity: number
+    }[]
+    date: Date,
+
+}
+
+
 

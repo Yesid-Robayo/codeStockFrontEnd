@@ -1,24 +1,20 @@
-import { useSelector } from "react-redux";
-import { userData } from "../../utils/utilsDTOS";
+
 import { RegisterCompany } from "../../components/RegisterCompany/RegisterCompany";
-import { useLabels, useStyles } from "../../hooks/contextHooks";
-import { useState } from "react";
-import { typeOfOptionCreateCompany } from "../../utils/utilsTypes";
 import { EditCompany } from "../../components/editCompany/EditCompany";
 import { DeleteCompany } from "../../components/deleteCompany/DeleteCompany";
-import { useNavigate } from "react-router-dom";
+import React from 'react';
+import { AdminPageLogic } from "./AdminPageLogic";
 
 
 
+/**
+ * Renders the admin page component.
+ * 
+ * @returns The rendered admin page component.
+ */
 export const AdminPage = () => {
-    const labels = useLabels();
-    const styles = useStyles();
-    const userData: userData = useSelector((state: any) => state.auth.user);
-    const [option, setOption] = useState<typeOfOptionCreateCompany>('add');
-    const onChange = (option: typeOfOptionCreateCompany) => {
-        setOption(option);
-    }
-  
+    const { labels, styles, option, onChange } = AdminPageLogic();
+
     return (
         <div className="flex flex-col min-h-screen bg-gradient-to-r from-zinc-950 via-zinc-800 to-zinc-950" style={{ fontFamily: styles.fonts.text }}>
             <main className="flex-grow">
@@ -37,10 +33,7 @@ export const AdminPage = () => {
 
                 </div>
             </main>
-            {/* Footer */}
-            <footer className="text-center text-white py-4">
-                <p>Derechos reservados &copy; 2024 | Nombre de tu empresa</p>
-            </footer>
+
         </div>
     );
 };

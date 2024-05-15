@@ -9,6 +9,10 @@ export const useLoadingContext = () => useContext(LoadingContext);
 
 
 
+/**
+ * Custom hook that retrieves the labels from the LanguageContext.
+ * @returns The labels object from the LanguageContext.
+ */
 export const useLabels = () => {
     const { labels } = useContext(LanguageContext);
     return labels;

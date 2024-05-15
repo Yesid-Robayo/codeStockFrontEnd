@@ -1,46 +1,13 @@
-import { useState } from "react";
-import "react-datepicker/dist/react-datepicker.css";
-import { useLabels, useStyles, useToast } from "../../hooks/contextHooks";
-import { CompanyAPI } from "../../services/CompanyAPI";
+import React from "react";
+import { RegisterCompanyLogic } from "./RegisterCompanyLogic";
 
+/**
+ * Component for registering a company.
+ * @returns JSX.Element
+ */
 export const RegisterCompany = () => {
-    const labels = useLabels();
-    const styles = useStyles();
-    const toast = useToast();
-    const companyAPi = CompanyAPI;
-    const [formData, setFormData] = useState({
-        nit: "",
-        name: "",
-        address: "",
-        phone: ""
-    });
 
-    const handleChange = (e: any) => {
-        const { name, value } = e.target;
-        setFormData({
-            ...formData,
-            [name]: value
-        });
-    };
-
-    const createCompany = async () => {
-        try {
-            const response = await companyAPi.createCompany(formData);
-            if (response) {
-                setFormData({
-                    nit: "",
-                    name: "",
-                    address: "",
-                    phone: ""
-                })
-                toast.showToast(labels.createCompanySuccess);
-            }
-
-        } catch (error) {
-        }
-    };
-
-    const { nit, name, address, phone } = formData;
+    const { handleChange, createCompany, nit, name, address, phone, labels, styles } = RegisterCompanyLogic();
 
     return (<div className="flex justify-center mt-4 items-center text-white h-full" style={{ minHeight: '60vh' }}>
         <div className="sm:w-2/4 md:w-2/3 lg:w-2/5 xl:w-2/6">

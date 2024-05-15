@@ -1,99 +1,21 @@
-import React, { useState } from "react";
+import React from "react";
 import "react-datepicker/dist/react-datepicker.css";
 import Select from "react-select";
-import { useLabels, useStyles, useToast } from "../../hooks/contextHooks";
 import DatePicker from "react-datepicker";
-import { UserAPI } from "../../services/UserAPI";
+import { RegisterLogic } from "./RegisterLogic";
+/**
+ * Renders the Register component.
+ * 
+ * @param {Object} props - The component props.
+ * @param {Function} props.onChangeLogin - The function to handle the login change event.
+ * @returns {JSX.Element} The rendered Register component.
+ */
+
 export const Register = ({ onChangeLogin }: { onChangeLogin: () => void }) => {
-    const labels = useLabels();
-    const styles = useStyles();
-    const toast = useToast();
-    const [formData, setFormData] = useState({
-        firstName: "",
-        lastName: "",
-        birthDate: null as Date | null, // Cambiado a null para trabajar con react-datepicker
-        gender: "",
-        phoneNumber: "",
-        email: "",
-        password: ""
-    });
-
-
-    const handleChange = (e: any) => {
-        const { name, value } = e.target;
-        setFormData({
-            ...formData,
-            [name]: value
-        });
-    };
-
-    const handleDateChange = (date: Date | null) => {
-        setFormData({
-            ...formData,
-            birthDate: date
-        });
-    };
-
-    const handleGenderChange = (selectedOption: any) => {
-        setFormData({
-            ...formData,
-            gender: selectedOption.value
-        });
-    };
-
-    const createUser = async () => {
-        try {
-            if (formData.firstName === "" || formData.lastName === "" || formData.birthDate === null || formData.email === "" || formData.password === "" || formData.gender === "" || formData.phoneNumber === "") {
-                toast.showToast(labels.requiredAllFields);
-                return;
-            }
-            if (!formData.email.includes('@')) {
-                toast.showToast(labels.emailNotValid);
-                return;
-            }
-
-            UserAPI.createUser({
-                name: formData.firstName,
-                lastName: formData.lastName,
-                dateOfBirth: formData.birthDate,
-                email: formData.email,
-                gender: formData.gender,
-                password: formData.password,
-                phone: formData.phoneNumber,
-                username: formData.phoneNumber,
-            })
-                .then((response: any) => {
-                    if (response.statusCode !== 200) {
-                      toast.showToast(labels.errorCreatingUser);
-                    } else {
-                        toast.showToast(labels.userCreated);
-                        setFormData({
-                            firstName: "",
-                            lastName: "",
-                            birthDate: null,
-                            email: "",
-                            password: "",
-                            gender: "",
-                            phoneNumber: "",
-                        });
-                        onChangeLogin();
-                    }
-
-                })
-                .catch((error) => {
-                    console.error('Error creating user:', error);
-                    toast.showToast(labels.errorCreatingUser);
-                });
-        } catch (error) {
-            toast.showToast(`${labels.errorCreatingUser}`);
-        }
-    };
-
-    const { firstName, lastName, birthDate, gender, phoneNumber, email, password } = formData;
-
+    const { birthDate, createUser, firstName, labels, lastName, styles, handleChange, handleDateChange, handleGenderChange, email, gender, password, phoneNumber } = RegisterLogic({ onChangeLogin });
     return (
         <div className="flex justify-center mt-4 items-center h-full" style={{ minHeight: '60vh' }}>
-            <div className="sm:w-2/4 md:w-2/3 lg:w-2/5 xl:w-2/6">
+            <div className="">
                 <div className="border-2 border-zinc-800 p-5 rounded-3xl">
                     <div className="text-center font-normal mt-3 text-xl" style={{ fontFamily: styles.fonts.primary }}>
                         <h1>{labels.register}</h1>

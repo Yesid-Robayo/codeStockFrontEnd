@@ -4,6 +4,9 @@ import { loadState, saveState } from '../helpers/localStorage';
 
 const preloadedState = loadState();
 
+/**
+ * The Redux store.
+ */
 const store = configureStore({
   reducer: rootReducer,
   preloadedState,

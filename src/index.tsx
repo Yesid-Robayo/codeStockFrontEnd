@@ -7,6 +7,12 @@ import { Provider } from 'react-redux';
 import store from './redux/store';
 import { MainProvider } from './context/MainContext';
 
+/**
+ * Creates a root React element and renders it into the specified container element.
+ *
+ * @param {string | HTMLElement} container - The container element or its ID where the React element will be rendered.
+ * @returns {ReactDOM.Root} - The root React element.
+ */
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );

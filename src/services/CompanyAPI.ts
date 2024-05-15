@@ -1,13 +1,25 @@
-import { get } from "http";
+import { routesUtil } from "../utils/routes.util";
 import { createCompanyDTO, responseCompanyDTO } from "../utils/utilsDTOS";
 
+/**
+ * Represents the CompanyAPI object.
+ */
 export const CompanyAPI = {
 
-    baseURL: 'http://localhost:8080/api/v1',
+    /**
+     * The base URL for the company API.
+     */
+    baseURL: `${routesUtil.baseUrl}${routesUtil.companyRoute.main}`,
 
+    /**
+     * Creates a new company.
+     * @param company - The company data.
+     * @returns A promise that resolves to the created company.
+     * @throws An error if the request fails.
+     */
     async createCompany(company: createCompanyDTO) {
 
-        const response = await fetch(`${this.baseURL}/company`, {
+        const response = await fetch(`${this.baseURL}${routesUtil.companyRoute.children.createCompany}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -21,18 +33,20 @@ export const CompanyAPI = {
             })
         });
 
-        if (response.ok
-        ) {
-            let result = await response.json();
+        if (response.ok) {
+            const result = await response.json();
             return await result;
         } else {
             throw new Error(response.statusText);
         }
     },
 
-
-    async getCompanies(): Promise<responseCompanyDTO[]> {
-        const response = await fetch(`${this.baseURL}/companies`, {
+    /**
+     * Retrieves a list of companies.
+     * @returns A promise that resolves to an array of companies or a number representing the status code if the request fails.
+     */
+    async getCompanies(): Promise<responseCompanyDTO[] | number> {
+        const response = await fetch(`${this.baseURL}${routesUtil.companyRoute.children.getCompanies}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
@@ -40,16 +54,21 @@ export const CompanyAPI = {
         });
 
         if (response.ok) {
-            let result: responseCompanyDTO[] = await response.json();
+            const result: responseCompanyDTO[] = await response.json();
             return await result;
         } else {
-            throw new Error(response.statusText);
+            return (response.status);
         }
     },
 
+    /**
+     * Deletes a company.
+     * @param idCompany - The ID of the company to delete.
+     * @returns A promise that resolves to the deleted company or the status text if the request fails.
+     */
     async deleteCompany(idCompany: number) {
 
-        const response = await fetch(`${this.baseURL}/company/${idCompany}`, {
+        const response = await fetch(`${this.baseURL}${routesUtil.companyRoute.children.deleteCompany}${idCompany}`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json'
@@ -57,15 +76,20 @@ export const CompanyAPI = {
         });
 
         if (response.ok) {
-            let result = await response.json();
+            const result = await response.json();
             return await result;
         } else {
-            throw new Error(response.statusText);
+            return (response.statusText);
         }
     },
 
+    /**
+     * Retrieves a company by ID.
+     * @param idCompany - The ID of the company to retrieve.
+     * @returns A promise that resolves to the retrieved company or the status code if the request fails.
+     */
     async getCompany(idCompany: number) {
-        const response = await fetch(`${this.baseURL}/company/${idCompany}`, {
+        const response = await fetch(`${this.baseURL}${routesUtil.companyRoute.children.getCompany}${idCompany}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
@@ -73,35 +97,41 @@ export const CompanyAPI = {
         });
 
         if (response.ok) {
-            let result: responseCompanyDTO = await response.json();
+            const result: responseCompanyDTO = await response.json();
+            return await result;
+        } else {
+            return (response.status);
+        }
+    },
+
+    /**
+     * Updates a company.
+     * @param company - The updated company data.
+     * @returns A promise that resolves to the updated company.
+     * @throws An error if the request fails.
+     */
+    async updateCompany(company: responseCompanyDTO) {
+
+        const response = await fetch(`${this.baseURL}${routesUtil.companyRoute.children.updateCompany}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                idCompany: company.idCompany,
+                nit: company.nit,
+                name: company.name,
+                address: company.address,
+                phone: company.phone
+            })
+        });
+
+        if (response.ok) {
+            const result = await response.json();
             return await result;
         } else {
             throw new Error(response.statusText);
         }
-    },
-
-    async updateCompany(company: responseCompanyDTO) {
-            
-            const response = await fetch(`${this.baseURL}/company`, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    idCompany: company.idCompany,
-                    nit: company.nit,
-                    name: company.name,
-                    address: company.address,
-                    phone: company.phone
-                })
-            });
-    
-            if (response.ok) {
-                let result = await response.json();
-                return await result;
-            } else {
-                throw new Error(response.statusText);
-            }
     }
 
 }

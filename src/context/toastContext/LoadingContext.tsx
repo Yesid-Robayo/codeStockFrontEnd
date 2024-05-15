@@ -1,4 +1,5 @@
 import { createContext } from 'react';
+import React from 'react';
 
 export const LoadingContext = createContext({
   isLoading: false,
@@ -7,6 +8,9 @@ export const LoadingContext = createContext({
 });
 
 
+/**
+ * Component that displays a loading spinner.
+ */
 export const Loading = () => {
   return (
     <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex items-center justify-center z-50">

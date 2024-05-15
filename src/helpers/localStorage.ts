@@ -1,5 +1,9 @@
 
 // Función para cargar el estado
+/**
+ * Loads the state from the local storage.
+ * @returns The parsed state object, or undefined if the state is not found or cannot be parsed.
+ */
 export const loadState = () => {
     try {
       const serializedState = localStorage.getItem('state');

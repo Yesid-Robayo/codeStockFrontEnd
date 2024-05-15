@@ -1,3 +1,14 @@
+/**
+ * FILEPATH: /c:/Users/Yesid Robayo/Desktop/codestockfrontend/src/index.css
+ * 
+ * This CSS file contains the styles for the index page of the CodeStock frontend.
+ * It imports the necessary styles from the Tailwind CSS framework and sets up custom scrollbar styles.
+ * Additionally, it imports fonts from Google Fonts for use in the page.
+ * 
+ * The scrollbar styles are customized using the ::-webkit-scrollbar pseudo-element selectors.
+ * The width of the scrollbar is set to 12 pixels, and the track and thumb have their own background colors.
+ * When hovering over the thumb, the background color changes.
+ */
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';

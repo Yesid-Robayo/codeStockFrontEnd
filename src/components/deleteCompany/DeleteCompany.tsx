@@ -1,50 +1,14 @@
-import React, { useEffect, useState } from "react";
-import { useLabels, useStyles, useToast } from "../../hooks/contextHooks";
-import { createCompanyDTO, responseCompanyDTO } from "../../utils/utilsDTOS";
-import { CompanyAPI } from "../../services/CompanyAPI";
 
+import React from 'react';
+import { DeleteCompanyLogic } from './DeleteCompanyLogic';
 
-
+/**
+ * Component for deleting a company.
+ * Renders a list of companies with a delete button for each company.
+ */
 export const DeleteCompany = () => {
-    const labels = useLabels();
-    const companyAPI = CompanyAPI;
-    const toast = useToast();
-    const styles = useStyles();
-    const [companies, setCompanies] = useState<responseCompanyDTO[]>([
 
-    ]);
-
-    useEffect(() => {
-        const fetchCompanies = async () => {
-            try {
-                const response = await companyAPI.getCompanies();
-                setCompanies(response);
-            } catch (error) {
-                toast.showToast(labels.errorToGetCompany);
-            }
-        };
-
-        fetchCompanies();
-
-
-
-    }, []);
-    const deleteCompany = (company: responseCompanyDTO) => {
-
-        try {
-            companyAPI.deleteCompany(company.idCompany).then((
-                response: any
-            ) => {
-                if (response.statusCode === 200) {
-                    setCompanies(companies.filter((item) => item.idCompany !== company.idCompany));
-                }
-            });
-        } catch (error) {
-           toast.showToast(labels.errorToDeleteCompany);
-        }
-        toast.showToast(labels.deleteCompanyToName + company.name);
-    };
-
+    const { companies, deleteCompany, labels, styles } = DeleteCompanyLogic();
     return (
         <div className="flex justify-center mt-4 text-white items-center h-full" style={{ minHeight: '60vh' }}>
             <div className="sm:w-2/4 md:w-2/3 lg:w-2/5 xl:w-2/6">
